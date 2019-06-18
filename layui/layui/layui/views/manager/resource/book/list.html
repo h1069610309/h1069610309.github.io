@@ -143,7 +143,7 @@
 						
 					}
 					public.ajax({
-						url: 'http://192.168.1.100:8189/ds1/book/findAllBookName'
+						url: 'http://61.163.69.117:8189/ds1/book/findAllBookName'
 					},{},fristxlk)*/
 				
 					
@@ -280,7 +280,7 @@
 					}
 				});*/
 				var form =layui.form;
-				$.post("http://192.168.1.100:8189/ds1/book/findAllBookName",function(msg){
+				$.post("http://61.163.69.117:8189/ds1/book/findAllBookName",function(msg){
 				var opt="<option value=''>请选择</option>";
 					$.each(msg.result, function() {
 						opt+="<option value="+this.name+">"+this.name+"</option>"	
@@ -289,7 +289,7 @@
 					
 					form.render();
 				});
-				$.post("http://192.168.1.100:8189/ds1/knowledge/findAllKnowLedge",function(msg){
+				$.post("http://61.163.69.117:8189/ds1/knowledge/findAllKnowLedge",function(msg){
 				var opt="<option value=''>请选择</option>";
 					$.each(msg.result, function() {
 						opt+="<option value="+this.name+">"+this.name+"</option>"	

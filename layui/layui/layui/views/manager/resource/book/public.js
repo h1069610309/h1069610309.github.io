@@ -5,7 +5,7 @@
 layui.define(['layer'],function(exports){
   exports('public', {
   	//服务端IP
-	serverIP:"http://192.168.1.100:8189"
+	serverIP:"http://61.163.69.117:8189"
 	//serverIP:"http://127.0.0.1:8080"
 	,ajaxMethod:'post'  	//ajax默认请求方式
   	,AUTHORIZATION:sessionStorage.getItem('AUTHORIZATION')
