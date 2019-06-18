@@ -1,0 +1,14 @@
+{
+	"msg": "ok",
+	"suc": true,
+	"result": [{
+		"name": "使用Vue进行前端开发",
+		"id": 87
+	}, {
+		"name": "JAVA实训-常用工具",
+		"id": 88
+	}, {
+		"name": "JAVA实训-spring boot",
+		"id": 90
+	}]
+}
