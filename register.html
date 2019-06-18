@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<!-- saved from url=(0039)https://v3.bootcss.com/examples/signin/ -->
+<html lang="zh-CN">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+<meta name="description" content="">
+<meta name="author" content="">
+
+<title>招生系统-注册</title>
+
+<!-- Bootstrap core CSS -->
+<link href="css/bootstrap.min.css" rel="stylesheet">
+
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+<!-- Custom styles for this template -->
+<link href="css/signin.css" rel="stylesheet">
+
+<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+<script src="js/ie-emulation-modes-warning.js"></script>
+<script src="js/jquery-3.3.1.min.js"></script>
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+      <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+	<div class="container">
+
+		<form class="form-signin" action="registers" method="post">
+			<h2 class="form-signin-heading">注册</h2>
+			<input name="uname" type="text" class="form-control"
+				placeholder="用户名" required="required" autofocus="autofocus">
+			<label for="inputEmail" class="sr-only">邮箱地址</label> <input
+				name="uemail" type="email" id="inputEmail" class="form-control"
+				placeholder="邮箱地址" required="required"> <label
+				for="inputPassword" class="sr-only">密码</label> <input
+				name="upassword" type="password" id="inputPassword"
+				class="form-control" placeholder="密码" required="required">
+			<div class="checkbox">
+
+				<label style="margin-left: 153px;"><a href="login.jsp"
+					style="text-decoration:none;">已有账号？点击登录</a></label>
+			</div>
+			<button class="btn btn-lg btn-primary btn-block" type="submit">注册</button>
+		</form>
+
+	</div>
+	<!-- /container -->
+
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	<script src="js/ie10-viewport-bug-workaround.js"></script>
+
+</body>
+<script type="text/javascript">
+	$(function() {
+		$("#inputEmail").blur(function() {
+			$.ajax({
+				type : 'post',
+				url : 'checkEmail',
+				data : {
+					'email' : $("#inputEmail").val(),
+				},
+				dataType : 'Text',
+				success : function(data) {
+					if (data == 0) {
+						alert("该邮箱已经注册过啦！赶快去登录吧。");
+						 $("#inputEmail").val(" ");
+					}
+				}
+
+			});
+		});
+	})
+</script>
+</html>
