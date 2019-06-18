@@ -1,0 +1,297 @@
+﻿<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>layui</title>
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<link rel="stylesheet" href="../../../../layuiadmin/layui/css/layui.css" media="all">
+		<!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
+	</head>
+
+	<body>
+		<div style="width: 90%;height:90%; margin: 10px; padding-top: 20px; background-color: white; ">
+			<form class="layui-form" id="forme">
+				<div class="layui-inline">
+					<div class="layui-form-item" style="width: 300px;">
+						<label class="layui-form-label">课程名称</label>
+						<div class="layui-input-block">
+							<select name="name" id="kcmc" lay-verify="required">
+				       		<option>请选择</option>
+				      		</select>
+						</div>
+					</div>
+				</div>
+				<div class="layui-inline">
+					<div class="layui-form-item" style="width: 300px;">
+						<label class="layui-form-label">学科</label>
+						<div class="layui-input-block">
+							<select name="city" lay-verify="required">
+			        <option value=""></option>
+			      
+			      </select>
+						</div>
+					</div>
+				</div>
+				<div class="layui-inline">
+					<div class="layui-form-item" style="width: 300px;">
+						<label class="layui-form-label">课程类型</label>
+						<div class="layui-input-block">
+							<select name="city" lay-verify="required">
+			        <option value=""></option>
+			        <option value="0">北京</option>
+			        <option value="1">上海</option>
+			        <option value="2">广州</option>
+			        <option value="3">深圳</option>
+			        <option value="4">杭州</option>
+			      </select>
+						</div>
+					</div>
+				</div>
+				<label>课程名称</label>
+				<select id="ding">
+					<option>"请选择"</option>
+				</select>
+			</form>
+			<div style="margin-bottom: 5px;">
+
+				<!-- 示例-970 -->
+				<ins class="adsbygoogle" style="display:inline-block;width:970px;height:90px" data-ad-client="ca-pub-6111334333458862" data-ad-slot="3820120620"></ins>
+
+			</div>
+
+			<div class="layui-btn-group demoTable">
+				<button class="layui-btn" data-type="getCheckData">获取选中行数据</button>
+				<button class="layui-btn" data-type="getCheckLength">获取选中数目</button>
+				<button class="layui-btn" data-type="isAll">验证是否全选</button>
+			</div>
+
+			<table class="layui-hide" id="test"></table>
+
+			<script type="text/html" id="barDemo">
+				<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+				<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+				<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+			</script>
+
+			<script src="../../../../layuiadmin/layui/layui.all.js" charset="utf-8"></script>
+			<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+			<script>
+				layui.use('table', function() {
+					var table = layui.table;
+					//监听表格复选框选择
+					table.on('checkbox(demo)', function(obj) {
+						console.log(obj)
+					});
+					//监听工具条
+					table.on('tool(demo)', function(obj) {
+						var data = obj.data;
+						if (obj.event === 'detail') {
+							layer.msg('ID：' + data.id + ' 的查看操作');
+						} else if (obj.event === 'del') {
+							layer.confirm('真的删除行么', function(index) {
+								obj.del();
+								layer.close(index);
+							});
+						} else if (obj.event === 'edit') {
+							layer.alert('编辑行：<br>' + JSON.stringify(data))
+						}
+					});
+
+					var $ = layui.$,
+						active = {
+							getCheckData: function() { //获取选中数据
+								var checkStatus = table.checkStatus('idTest'),
+									data = checkStatus.data;
+								layer.alert(JSON.stringify(data));
+							},
+							getCheckLength: function() { //获取选中数目
+								var checkStatus = table.checkStatus('idTest'),
+									data = checkStatus.data;
+								layer.msg('选中了：' + data.length + ' 个');
+							},
+							isAll: function() { //验证是否全选
+								var checkStatus = table.checkStatus('idTest');
+								layer.msg(checkStatus.isAll ? '全选' : '未全选')
+							}
+						};
+
+					$('.demoTable .layui-btn').on('click', function() {
+						var type = $(this).data('type');
+						active[type] ? active[type].call(this) : '';
+					});
+				});
+			</script>
+			<script>
+				layui.use(['table','public'], function() {
+					var table = layui.table;
+					var public = layui.public;
+					//下拉框
+					/*
+					 var opt="<option value=''>请选择</option>";
+					$.each(msg.result, function() {
+						opt+="<option value="+this.name+">"+this.name+"</option>"	
+						alert(this.name)
+					});
+					$("#kcmc").html(opt);
+					 * */
+					/*var fristxlk=function(res){
+						if(res&&res.suc&&res.result){
+							var opt="<option value=''>请选择</option>";
+							$.each(res.result, function() {
+							opt+="<option value="+this.name+">"+this.name+"</option>"	
+							});
+							$("#kcmc").html(opt);
+							form.render();
+						}
+						
+					}
+					public.ajax({
+						url: 'http://192.168.1.100:8189/ds1/book/findAllBookName'
+					},{},fristxlk)*/
+				
+					
+					table.render({
+						elem: '#test',
+						method:public.ajaxMethod,
+						request:{
+							pageName:'pageNo',
+							limitName:'pageSize'
+						},
+						url: public.serverIP+'/ds1/book/findAllBook',
+						cols: [
+							[{
+								field: 'bookId',
+								width: 80,
+								title: 'ID',
+								sort: true
+							}, {
+								field: 'klName',
+								width: 80,
+								title: '课程类型'
+							}, {
+								field: 'isSupter',
+								width: 80,
+								title: '是否精品课',
+								
+							}, {
+								field: 'uploaderId',
+								width: 80,
+								title: '上传者id'
+							}, {
+								field: 'uploaderName',
+								title: '上传者name',
+								width: 150,
+							}, {
+								field: 'intc',
+								width: 80,
+								title: '课程标签',
+								sort: true
+							}, {
+								field: 'uploadTime',
+								width: 80,
+								title: '评分',
+								sort: true
+							}, {
+								field: 'bookName',
+								width: 80,
+								title: '课程名称'
+							}, {
+								field: 'klId',
+								width: 135,
+								title: '售价',
+								sort: true
+							},{
+								fixed: 'right', title:'操作', toolbar: '#barDemo', width:200
+							}
+							
+							]
+						],
+						page: true,
+						/*where: whereData(),*/
+						response:{
+							statusCode:true,
+						},
+						parseData:function(res){
+							var count=0;
+							if(res.result && res.result.length>0){
+								$.ajax({
+									type:public.ajaxMethod,
+									url: public.serverIP+'/ds1/book/findAllBook?pageNo=1&pageSize=3',
+									async:false,
+									/*data:whereData(),*/
+								/*	data:{
+										"pageNo":"1",
+										"pageSize":"3",
+									}*/
+									success: function(result){
+										if(result && result.suc){
+										count=result.result.length;
+											console.log(count)
+										}
+										alert("ok");
+										
+									},
+									error: function(){
+										alert("error");
+									}
+									
+								});
+								return{
+									"code":res.suc,
+									"msg":res.msg,
+									"count":count,
+									"data":res.result
+								};
+								
+							}
+							
+						},
+						
+						
+						
+					});
+					
+					form=layui.form;
+				});
+			</script>
+<script type="text/html" id="barDemo">
+  <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+  <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+  <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+			<script>
+				$ = layui.$;
+				/*$.ajax({
+					type: "post",
+					url: "http://wei:8080/ds1/book/findAllBook",
+					data: {},
+					dataType:"jsonp",  //数据格式设置为jsonp
+           	 		jsonp:"callback",  //Jquery生成验证参数的名称
+					success: function(obj) {
+						console.log(obj.msg);
+					}
+				});*/
+				var form =layui.form;
+				$.post("http://192.168.1.100:8189/ds1/book/findAllBookName",function(msg){
+					console.log(msg.result[0].name)
+					/*msg.result.each(function(){
+						var opt="<option value=''>请选择</option>";
+						alert()
+					})*/
+				var opt="<option value=''>请选择</option>";
+					$.each(msg.result, function() {
+						opt+="<option value="+this.name+">"+this.name+"</option>"	
+						alert(this.name)
+					});
+					$("#kcmc").html(opt);
+					
+					form.render();
+				})
+			</script>
+		</div>
+	</body>
+
+</html>
